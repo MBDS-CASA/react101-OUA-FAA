@@ -1,0 +1,5 @@
+[
+  { "id": 1, "titre": "Mathématiques", "note": 18 },
+  { "id": 2, "titre": "Physique", "note": 15 },
+  { "id": 3, "titre": "Informatique", "note": 20 }
+]

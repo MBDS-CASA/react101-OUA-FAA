@@ -2,7 +2,7 @@ import { useState } from 'react'
 import viteLogo from '/vite.svg'
 import './App.css'
 import emsi from './assets/emsi.png'
-
+import data from './data.json';
 
 function Header() {
   return (
@@ -45,17 +45,43 @@ function Footer() {
 }
 
 
+function getRandomItem(arr) {
+  const index = Math.floor(Math.random() * arr.length);
+  return arr[index];
+}
 
-      function App() {
-       return ( 
-       <> 
-       <Header />
 
-  
-      <Content />
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+function NoteItem({ titre, note }) {
+  return (
+    <div style={{ border: '1px solid #ccc', padding: '1rem', margin: '1rem auto', width: '300px', borderRadius: '8px', background: '#f9f9f9' }}>
+      <h3>{titre}</h3>
+      <p>Note : {note}</p>
+    </div>
+  );
+}
+
+
+
+
+function App() {
+  const [randomNote, setRandomNote] = useState(getRandomItem(data));
+
+  const handleNewNote = () => {
+    setRandomNote(getRandomItem(data));
+  }
+
+  return (
+    <>
+      <Header />
+      <MainContent />
+
+      <NoteItem titre={randomNote.titre} note={randomNote.note} />
+
+      <button onClick={handleNewNote} style={{ display: 'block', margin: '1rem auto' }}>
+        Nouvelle note aléatoire
+      </button>
+
+      <Footer />
     </>
   )
 }
