@@ -18,23 +18,23 @@ function Header() {
   )
 }
 
+function MainContent() {
+  return (
+    <main style={{ textAlign: 'center', marginBottom: '2rem' }}>
+      Ici, nous afficherons des informations interessantes :)
+    </main>
+  )
+}
+
+function Footer() {
+  return (
+    <footer style={{ textAlign: 'center', marginTop: '2rem', position: 'fixed', bottom: 0, width: '100%', padding: '1rem', background: '#f0f0f0' }}>
+      Tous droits réservés - Ouafaa Chafiq
+    </footer>
+  )
+}
 
 
-  function Content() {
-   const [count, setCount] = useState(0)
-
-   return (
-
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      ) 
-      }
 
       function App() {
        return ( 
