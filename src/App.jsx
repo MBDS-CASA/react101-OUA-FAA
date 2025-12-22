@@ -62,6 +62,26 @@ function NoteItem({ titre, note }) {
 
 
 
+function Menu() {
+  const items = ["Notes", "Etudiants", "Matières", "A propos"];
+
+  const handleClick = (item) => {
+    alert(`Vous avez cliqué sur : ${item}`);
+  }
+
+  return (
+    <nav style={{ position: 'fixed', top: 0, left: 0, padding: '1rem', background: '#eee', borderRadius: '0 0 8px 0' }}>
+      <ul style={{ listStyle: 'none', margin: 0, padding: 0 }}>
+        {items.map((item) => (
+          <li key={item} style={{ margin: '0.5rem 0', cursor: 'pointer', fontWeight: 'bold' }} onClick={() => handleClick(item)}>
+            {item}
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+}
+
 
 function App() {
   const [randomNote, setRandomNote] = useState(getRandomItem(data));
@@ -72,6 +92,7 @@ function App() {
 
   return (
     <>
+      <Menu />
       <Header />
       <MainContent />
 
