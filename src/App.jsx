@@ -36,9 +36,10 @@ function MainContent() {
 }
 
 function Footer() {
+  const annee = new Date().getFullYear();
   return (
     <footer style={{ textAlign: 'center', marginTop: '2rem', position: 'fixed', bottom: 0, width: '100%', padding: '1rem', background: '#f0f0f0' }}>
-      Tous droits réservés - Ouafaa Chafiq
+      © {annee} - Ouafaa.Chafiq, Tous droits réservés.
     </footer>
   )
 }
