@@ -2,7 +2,12 @@ import { useState } from 'react'
 import viteLogo from '/vite.svg'
 import './App.css'
 import emsi from './assets/emsi.png'
-import data from './data.json';
+import data from './data/data.json';
+import Notes from './components/Notes';
+import Etudiants from './components/Etudiants';
+import Matieres from './components/Matieres';
+import Apropos from './components/Apropos';
+
 
 function Header() {
   return (
@@ -113,17 +118,23 @@ function Menu({ activeMenu, setActiveMenu }) {
 
 
 function Content({ activeMenu }) {
-  return (
-    <div style={{
-      padding: '2rem',
-      background: '#ecf0f1',
-      borderRadius: '8px'
-    }}>
-      <h2>{activeMenu}</h2>
-      <p>Contenu de la section {activeMenu}</p>
-    </div>
-  );
+  switch (activeMenu) {
+    case "Notes":
+      return <Notes />;
+    case "Etudiants":
+      return <Etudiants />;
+    case "Matières":
+      return <Matieres />;
+    case "A propos":
+      return <Apropos />;
+    default:
+      return null;
+  }
 }
+
+
+
+
 
 
 
