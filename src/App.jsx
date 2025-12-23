@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import viteLogo from '/vite.svg'
 import './App.css'
 import emsi from './assets/emsi.png'
@@ -7,7 +7,8 @@ import Notes from './components/Notes';
 import Etudiants from './components/Etudiants';
 import Matieres from './components/Matieres';
 import Apropos from './components/Apropos';
-
+import { CSSTransition, TransitionGroup } from "react-transition-group";
+import "./App.css"; // contient les classes fade-*
 
 function Header() {
   return (
@@ -118,18 +119,25 @@ function Menu({ activeMenu, setActiveMenu }) {
 
 
 function Content({ activeMenu }) {
+  let Component;
   switch (activeMenu) {
     case "Notes":
-      return <Notes />;
+      Component = Notes;
+      break;
     case "Etudiants":
-      return <Etudiants />;
+      Component = Etudiants;
+      break;
     case "Matières":
-      return <Matieres />;
+      Component = Matieres;
+      break;
     case "A propos":
-      return <Apropos />;
+      Component = Apropos;
+      break;
     default:
       return null;
   }
+
+return <div key={activeMenu}><Component /></div>;
 }
 
 
@@ -149,8 +157,8 @@ function App() {
       <div style={{
         marginLeft: '200px',
         padding: '2rem',
-        maxWidth: '800px'
-      }}>
+        maxWidth: '800px',
+      }} >
         <Header />
         <MainContent />
 
