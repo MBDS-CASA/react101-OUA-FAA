@@ -51,29 +51,57 @@ function getRandomItem(arr) {
 }
 
 
-function NoteItem({ titre, note }) {
+function NoteItem({ note }) {
   return (
-    <div style={{ border: '1px solid #ccc', padding: '1rem', margin: '1rem auto', width: '300px', borderRadius: '8px', background: '#f9f9f9' }}>
-      <h3>{titre}</h3>
-      <p>Note : {note}</p>
+    <div style={{
+      border: '1px solid #ccc',
+      padding: '1rem',
+      margin: '1rem auto',
+      width: '300px',
+      borderRadius: '8px',
+      background: '#f9f9f9'
+    }}>
+      <h3>{note.titre}</h3>
+      <p>Note : {note.note}</p>
+      {/* Affiche les autres champs dynamiquement */}
+      {note.nomEtudiant && <p>Étudiant : {note.nomEtudiant}</p>}
+      {note.matiere && <p>Matière : {note.matiere}</p>}
+      {note.id && <p>ID : {note.id}</p>}
     </div>
   );
 }
 
 
 
-function Menu() {
+
+function Menu({ activeMenu, setActiveMenu }) {
   const items = ["Notes", "Etudiants", "Matières", "A propos"];
 
-  const handleClick = (item) => {
-    alert(`Vous avez cliqué sur : ${item}`);
-  }
-
   return (
-    <nav style={{ position: 'fixed', top: 0, left: 0, padding: '1rem', background: '#eee', borderRadius: '0 0 8px 0' }}>
-      <ul style={{ listStyle: 'none', margin: 0, padding: 0 }}>
+    <nav style={{
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      width: '180px',
+      height: '100vh',
+      background: '#2c3e50',
+      color: '#fff',
+      padding: '1rem'
+    }}>
+      <ul style={{ listStyle: 'none', padding: 0 }}>
         {items.map((item) => (
-          <li key={item} style={{ margin: '0.5rem 0', cursor: 'pointer', fontWeight: 'bold' }} onClick={() => handleClick(item)}>
+          <li
+            key={item}
+            onClick={() => setActiveMenu(item)}
+            style={{
+              padding: '0.75rem',
+              marginBottom: '0.5rem',
+              cursor: 'pointer',
+              borderRadius: '6px',
+              background: activeMenu === item ? '#1abc9c' : 'transparent',
+              fontWeight: activeMenu === item ? 'bold' : 'normal'
+            }}
+          >
             {item}
           </li>
         ))}
@@ -83,28 +111,44 @@ function Menu() {
 }
 
 
-function App() {
-  const [randomNote, setRandomNote] = useState(getRandomItem(data));
 
-  const handleNewNote = () => {
-    setRandomNote(getRandomItem(data));
-  }
+function Content({ activeMenu }) {
+  return (
+    <div style={{
+      padding: '2rem',
+      background: '#ecf0f1',
+      borderRadius: '8px'
+    }}>
+      <h2>{activeMenu}</h2>
+      <p>Contenu de la section {activeMenu}</p>
+    </div>
+  );
+}
+
+
+
+
+function App() {
+  const [activeMenu, setActiveMenu] = useState("Notes");
 
   return (
     <>
-      <Menu />
-      <Header />
-      <MainContent />
+      <Menu activeMenu={activeMenu} setActiveMenu={setActiveMenu} />
 
-      <NoteItem titre={randomNote.titre} note={randomNote.note} />
+      <div style={{
+        marginLeft: '200px',
+        padding: '2rem',
+        maxWidth: '800px'
+      }}>
+        <Header />
+        <MainContent />
 
-      <button onClick={handleNewNote} style={{ display: 'block', margin: '1rem auto' }}>
-        Nouvelle note aléatoire
-      </button>
+        <Content activeMenu={activeMenu} />
 
-      <Footer />
+        <Footer />
+      </div>
     </>
-  )
+  );
 }
-
 export default App
+
